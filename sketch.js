@@ -3,29 +3,26 @@ var mashtape;
 var head;
 var clinton;
 var ricodallas;
-var volume=0;
+var volume = 0;
 
-
-function preload(){
-mySong = loadSound("./assets/Future.mp3");
-mashtape = loadImage("./assets/mashtape.png");
-head = loadImage("./assets/head.png");
-clinton = loadImage("./assets/clinton.png");
-ricodallas = loadImage("./assets/ricodallas.png");
-
+function preload() {
+  mySong = loadSound("./assets/Future.mp3");
+  mashtape = loadImage("./assets/mashtape.png");
+  head = loadImage("./assets/head.png");
+  clinton = loadImage("./assets/clinton.png");
+  ricodallas = loadImage("./assets/ricodallas.png");
 }
 
 function setup() {
-createCanvas(windowWidth,windowHeight);
-background(31, 6, 47);
-angleMode(DEGREES);
-amplitude = new p5.Amplitude();
-amplitude.setInput(mySong);
-
+  createCanvas(windowWidth, windowHeight);
+  background(31, 6, 47);
+  angleMode(DEGREES);
+  amplitude = new p5.Amplitude();
+  amplitude.setInput(mySong);
 }
 
 function mousePressed() {
-  if ( mySong.isPlaying() ) {
+  if (mySong.isPlaying()) {
     mySong.pause();
   } else {
     mySong.play();
@@ -38,33 +35,25 @@ function draw() {
 
   //Draw the cover in the background
   push();
-  translate(width/2,height/2);
+  translate(width / 2, height / 2);
   imageMode(CENTER);
-  image(mashtape, 0, 0, [500], [500]);
-  filter(BLUR, 5);
+  image(mashtape, 0, 0, 500, 500);
   pop();
 
   //Draw Clinton's body over the cover
   push();
-  translate(width/2,height/2);
+  translate(width / 2, height / 2);
   imageMode(CENTER);
-  image(clinton, 0, 0, [200], [200]);
+  image(clinton, 0, 0, 200, 200);
   pop();
 
   //Draw Clinton's head and changes its size according to the volume of the song
   volume = amplitude.getLevel();
-  volume = map(volume, 0, 1, 0, height)
-  translate(width/2,height/2);
+  volume = map(volume, 0, 1, 0, height);
+  translate(width / 2, height / 2);
   imageMode(CENTER);
-  image(head, 10, -124, [57+volume/2], [80+volume/2]);
+  image(head, 10, -124, (57 + volume / 2), (80 + volume / 2));
   console.log("amplitude:" + amplitude.getLevel());
   console.log("var volume:" + volume);
-  // volume = map(volume, 0, 100, 0, 100);
-  // image(head, 10, -124, (head.width / 1.5) * volume * 5, (head.height / 1.5) * volume * 5);
-
-  // fill(255);
-  // let level = analyzer.getLevel();
-  // let size = map(level, 0, 1, 0, 200);
-  // ellipse(width/2, height/2, size, size);
 
 }
